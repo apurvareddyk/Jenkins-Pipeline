@@ -10,7 +10,7 @@ pipeline {
     post {
         always {
             echo 'Pipeline has finished, sending email...'
-            mail to: 'apurva.karne@sjsu.edu',  // Replace with your email
+            mail to: 'apurva.karne@gmail.com',  // Replace with your email
                  subject: "Pipeline Completed: ${currentBuild.fullDisplayName}",
                  body: "The pipeline has finished. Check the details at: ${env.BUILD_URL}"
             deleteDir() /* Clean up the workspace */
