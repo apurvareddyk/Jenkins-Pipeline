@@ -1,9 +1,10 @@
 pipeline {
     agent any
     stages {
-        stage('No-op') {
+        stage('Fail Stage') {
             steps {
-                sh 'ls'
+                // This command will fail, invoking the failure block
+                sh 'exit 1'  // Forces a failure
             }
         }
     }
@@ -20,7 +21,7 @@ pipeline {
         }
         failure {
             echo 'I failed :('
-            mail to: 'apurva.karne@sjsu.edu',
+            mail to: 'team@example.com',
                  subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
                  body: "Something is wrong with ${env.BUILD_URL}"
         }
