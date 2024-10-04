@@ -12,11 +12,11 @@ pipeline {
         always {
             echo 'One way or another, I have finished'
             deleteDir() /* clean up our workspace */
-            hipchatSend color: GRAY, notify: true, message: "Pipeline has finished. Check: ${env.BUILD_URL}"
+            hipchatSend  color: 'RED', notify: true, message: "Pipeline has finished. Check: ${env.BUILD_URL}"
         }
         failure {
             echo 'I failed :('
-            hipchatSend color: RED, notify: true, message: "Pipeline failed: ${currentBuild.fullDisplayName}. Check: ${env.BUILD_URL}"
+            hipchatSend  color: 'RED', notify: true, message: "Pipeline failed: ${currentBuild.fullDisplayName}. Check: ${env.BUILD_URL}"
         }
     }
 }
