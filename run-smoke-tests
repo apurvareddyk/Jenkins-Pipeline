@@ -1,11 +1,15 @@
 #!/bin/bash
 
-# run-smoke-tests script
+# run-smoke-tests script with authentication
 
-echo "Running basic connectivity test..."
+echo "Running basic connectivity test with authentication..."
 
-# Check if the application homepage or any accessible page is reachable
-response=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080)
+# Replace with your actual username and password
+USERNAME="apurvareddyk"
+PASSWORD="Apurva@2000"
+
+# Check if the application homepage is accessible with basic authentication
+response=$(curl -s -o /dev/null -w "%{http_code}" -u "$USERNAME:$PASSWORD" http://localhost:8080)
 echo "HTTP response code from application homepage: $response"
 
 if [ "$response" -eq 200 ]; then
