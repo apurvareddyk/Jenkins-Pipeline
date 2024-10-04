@@ -5,9 +5,12 @@
 echo "Running smoke tests..."
 
 # Example of checking the health of the application
-# Replace with actual smoke test commands
+# Replace with actual smoke test commands (e.g., checking a health endpoint)
 
-if curl -s http://localhost:8080/health | grep "healthy"; then
+response=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/health)
+echo "HTTP response code from health check: $response"
+
+if [ "$response" -eq 200 ]; then
     echo "Application is healthy."
     exit 0
 else
