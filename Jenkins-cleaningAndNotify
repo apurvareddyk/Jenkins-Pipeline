@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('No-op') {
             steps {
-                mail to: 'apurva.karne@sjsu.com',
+                mail to: 'apurva.karne@sjsu.edu',
              subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
              body: "Something is wrong with ${env.BUILD_URL}"
             }
