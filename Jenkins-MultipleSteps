@@ -1,25 +1,37 @@
 pipeline {
     agent any
-
     stages {
         stage('Build') {
             steps {
-                echo 'Building the project'
-                sh 'make build'
+                sh 'echo "Hello World"'
+                sh '''
+                    echo "Multiline shell steps work too"
+                    ls -lah
+                '''
             }
         }
         stage('Test') {
             steps {
-                echo 'Running tests'
-                sh 'make test'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying to production'
-                sh 'make deploy'
+                sh 'echo "Running Tests"'
+                sh 'exit 1'  // Simulating a test failure
             }
         }
     }
+    post {
+        always {
+            echo 'This will always run'
+        }
+        success {
+            echo 'This will run only if the build succeeds'
+        }
+        failure {
+            echo 'This will run only if the build fails'
+        }
+        unstable {
+            echo 'This will run if the build is marked unstable'
+        }
+        changed {
+            echo 'This runs if the pipeline state changes (e.g., from failure to success)'
+        }
+    }
 }
-
