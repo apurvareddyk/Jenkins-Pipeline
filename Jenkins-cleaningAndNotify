@@ -1,22 +1,20 @@
 pipeline {
     agent any
     stages {
-        stage('Fail Stage') {
+        stage('Run Shell Command') {
             steps {
-                // This command will fail, invoking the failure block
-                sh 'exit 1'  // Forces a failure
+                sh 'ls -l'  // You can replace 'ls -l' with any command you want
             }
         }
     }
     post {
         always {
-            echo 'One way or another, I have finished'
-            deleteDir() /* clean up our workspace */
-            hipchatSend  color: 'RED', notify: true, message: "Pipeline has finished. Check: ${env.BUILD_URL}"
-        }
-        failure {
-            echo 'I failed :('
-            hipchatSend  color: 'RED', notify: true, message: "Pipeline failed: ${currentBuild.fullDisplayName}. Check: ${env.BUILD_URL}"
+            echo 'Pipeline has finished, sending email...'
+            mail to: 'apurva.karne@sjsu.edu',  // Replace with your email
+                 subject: "Pipeline Completed: ${currentBuild.fullDisplayName}",
+                 body: "The pipeline has finished. Check the details at: ${env.BUILD_URL}"
+            deleteDir() /* Clean up the workspace */
         }
     }
 }
+
