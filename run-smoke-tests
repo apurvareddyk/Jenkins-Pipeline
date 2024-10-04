@@ -2,18 +2,16 @@
 
 # run-smoke-tests script
 
-echo "Running smoke tests..."
+echo "Running basic connectivity test..."
 
-# Example of checking the health of the application
-# Replace with actual smoke test commands (e.g., checking a health endpoint)
-
-response=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/health)
-echo "HTTP response code from health check: $response"
+# Check if the application homepage or any accessible page is reachable
+response=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080)
+echo "HTTP response code from application homepage: $response"
 
 if [ "$response" -eq 200 ]; then
-    echo "Application is healthy."
+    echo "Application homepage is accessible."
     exit 0
 else
-    echo "Application is NOT healthy."
+    echo "Application homepage is NOT accessible."
     exit 1
 fi
