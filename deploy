@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# deploy script
+
+# Check if the environment parameter is passed
+if [ -z "$1" ]; then
+    echo "Usage: $0 <environment>"
+    echo "e.g., $0 staging or $0 production"
+    exit 1
+fi
+
+# Set environment from the first parameter
+ENVIRONMENT=$1
+
+echo "Deploying to $ENVIRONMENT environment..."
+
+# Add environment-specific deployment logic
+if [ "$ENVIRONMENT" = "staging" ]; then
+    echo "Deploying to Staging..."
+    # Example of deployment logic for staging
+    echo "Deployment to Staging completed."
+    
+elif [ "$ENVIRONMENT" = "production" ]; then
+    echo "Deploying to Production..."
+    # Example of deployment logic for production
+    echo "Deployment to Production completed."
+    
+else
+    echo "Unknown environment: $ENVIRONMENT"
+    exit 1
+fi
