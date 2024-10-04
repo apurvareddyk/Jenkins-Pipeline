@@ -4,9 +4,9 @@
 
 echo "Running basic connectivity test with authentication..."
 
-# Replace with your actual username and password
-USERNAME="apurvareddyk"
-PASSWORD="Apurva@2000"
+# Replace with actual username and password
+USERNAME="********"
+PASSWORD="********"
 
 # Check if the application homepage is accessible with basic authentication
 response=$(curl -s -o /dev/null -w "%{http_code}" -u "$USERNAME:$PASSWORD" http://localhost:8080)
