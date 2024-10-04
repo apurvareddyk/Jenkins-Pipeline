@@ -12,12 +12,11 @@ pipeline {
         always {
             echo 'One way or another, I have finished'
             deleteDir() /* clean up our workspace */
+            hipchatSend color: 'gray', notify: true, message: "Pipeline has finished. Check: ${env.BUILD_URL}"
         }
         failure {
             echo 'I failed :('
-            mail to: 'apurva.karne@gmail.com',
-                 subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
-                 body: "The pipeline has failed. Check the details at: ${env.BUILD_URL}"
+            hipchatSend color: 'red', notify: true, message: "Pipeline failed: ${currentBuild.fullDisplayName}. Check: ${env.BUILD_URL}"
         }
     }
 }
